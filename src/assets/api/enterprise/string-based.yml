@@ -5026,6 +5026,290 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+  '/groups/{groupId}/managers':
+    get:
+      tags:
+        - Users
+      summary: 'List Group Managers'
+      operationId: api.groups.managers.getMany
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+        -
+          $ref: '#/components/parameters/QueryTeamIds'
+        -
+          name: orderBy
+          in: query
+          description: 'Read more about [sorting rules](#section/Introduction/Sorting)'
+          schema:
+            type: string
+            default: id
+            enum:
+              - id
+              - username
+              - email
+              - status
+              - createdAt
+              - lastSeen
+          example: 'createdAt desc,username'
+      responses:
+        '200':
+          description: 'Group Managers List'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupManagerCollectionResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
+    patch:
+      tags:
+        - Users
+      summary: 'Update Group Managers'
+      operationId: api.groups.managers.patch
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+      requestBody:
+        description: 'A JSON Patch document as defined by <a href="https://tools.ietf.org/html/rfc6902#section-3" target="_blank">RFC 6902</a>'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupManagerMassPatch'
+      responses:
+        '200':
+          description: 'Group Managers List'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupManagerCollectionUpdateResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
+  '/groups/{groupId}/managers/{userId}':
+    get:
+      tags:
+        - Users
+      summary: 'Get Group Manager'
+      operationId: api.groups.managers.get
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+        -
+          $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: 'Group Manager data'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupManagerResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group or user with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
+  '/groups/{groupId}/teams':
+    get:
+      tags:
+        - Teams
+      summary: 'List Group Teams'
+      operationId: api.groups.teams.getMany
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+        -
+          name: orderBy
+          in: query
+          description: 'Read more about [sorting rules](#section/Introduction/Sorting)'
+          schema:
+            type: string
+            default: id
+            enum:
+              - id
+              - name
+              - createdAt
+              - updatedAt
+          example: 'createdAt desc,name'
+      responses:
+        '200':
+          description: 'Group Teams List'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupTeamCollectionResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
+    patch:
+      tags:
+        - Teams
+      summary: 'Update Group Teams'
+      operationId: api.groups.teams.patch
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+      requestBody:
+        description: 'A JSON Patch document as defined by <a href="https://tools.ietf.org/html/rfc6902#section-3" target="_blank">RFC 6902</a>'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupTeamMassPatch'
+      responses:
+        '200':
+          description: 'Group Teams List'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupTeamCollectionUpdateResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
+  '/groups/{groupId}/teams/{teamId}':
+    get:
+      tags:
+        - Teams
+      summary: 'Get Group Team'
+      operationId: api.groups.teams.get
+      parameters:
+        -
+          $ref: '#/components/parameters/GroupId'
+        -
+          $ref: '#/components/parameters/TeamId'
+      responses:
+        '200':
+          description: 'Group Team data'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupTeamResource'
+        '400':
+          description: 'Invalid Request Parameters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCollectionResource'
+        '404':
+          description: 'Group or team with specified id was not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundExceptionResource'
+        '405':
+          description: 'Method Not Allowed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedExceptionResource'
+        '503':
+          description: 'Service Unavailable'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableExceptionResource'
   '/projects/{projectId}/issues':
     get:
       tags:
@@ -14529,6 +14813,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TmSegmentResource'
+        '204':
+          description: 'TM segment was successfully deleted'
         '400':
           description: 'Invalid Request Parameters'
           content:
@@ -23612,6 +23898,138 @@ components:
                 -
                   type: array
                   items: { type: string }
+    GroupManagerMassPatch:
+      description: 'A JSON Patch document as defined by <a href="https://tools.ietf.org/html/rfc6902#section-3" target="_blank">RFC 6902</a>'
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupManagerMassOperation'
+      example:
+        -
+          op: add
+          path: /-
+          value:
+            userId: 18
+        -
+          op: remove
+          path: /24
+    GroupManagerMassOperation:
+      description: 'A JSON Patch (222) operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4)'
+      required:
+        - op
+      properties:
+        op:
+          description: 'Patch operation to perform'
+          type: string
+          enum:
+            - remove
+            - add
+      type: object
+      discriminator:
+        propertyName: op
+        mapping:
+          add: '#/components/schemas/GroupManagerMassOperationAdd'
+          remove: '#/components/schemas/GroupManagerMassOperationRemove'
+    GroupManagerMassOperationRemove:
+      description: 'A JSON Patch `Remove` operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4.3)'
+      required:
+        - path
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/GroupManagerMassOperation'
+        -
+          properties:
+            path:
+              description: 'A JSON Pointer as defined by <a href="https://tools.ietf.org/html/rfc6901" target="_blank">RFC 6901</a>'
+              type: string
+              format: json-pointer
+              enum:
+                - '/{userId}'
+    GroupManagerMassOperationAdd:
+      description: 'A JSON Patch `Add` operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4.3)'
+      required:
+        - path
+        - value
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/GroupManagerMassOperation'
+        -
+          properties:
+            path:
+              description: 'A JSON Pointer as defined by <a href="https://tools.ietf.org/html/rfc6901" target="_blank">RFC 6901</a>'
+              type: string
+              format: json-pointer
+              enum:
+                - /-
+            value:
+              type: object
+    GroupTeamMassPatch:
+      description: 'A JSON Patch document as defined by <a href="https://tools.ietf.org/html/rfc6902#section-3" target="_blank">RFC 6902</a>'
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupTeamMassOperation'
+      example:
+        -
+          op: add
+          path: /-
+          value:
+            teamId: 18
+        -
+          op: remove
+          path: /24
+    GroupTeamMassOperation:
+      description: 'A JSON Patch (222) operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4)'
+      required:
+        - op
+      properties:
+        op:
+          description: 'Patch operation to perform'
+          type: string
+          enum:
+            - remove
+            - add
+      type: object
+      discriminator:
+        propertyName: op
+        mapping:
+          add: '#/components/schemas/GroupTeamMassOperationAdd'
+          remove: '#/components/schemas/GroupTeamMassOperationRemove'
+    GroupTeamMassOperationRemove:
+      description: 'A JSON Patch `Remove` operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4.3)'
+      required:
+        - path
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/GroupTeamMassOperation'
+        -
+          properties:
+            path:
+              description: 'A JSON Pointer as defined by <a href="https://tools.ietf.org/html/rfc6901" target="_blank">RFC 6901</a>'
+              type: string
+              format: json-pointer
+              enum:
+                - '/{teamId}'
+    GroupTeamMassOperationAdd:
+      description: 'A JSON Patch `Add` operation as defined by [RFC 6902](https://tools.ietf.org/html/rfc6902#section-4.3)'
+      required:
+        - path
+        - value
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/GroupTeamMassOperation'
+        -
+          properties:
+            path:
+              description: 'A JSON Pointer as defined by <a href="https://tools.ietf.org/html/rfc6901" target="_blank">RFC 6901</a>'
+              type: string
+              format: json-pointer
+              enum:
+                - /-
+            value:
+              type: object
     GroupCreateForm:
       required:
         - name
@@ -23645,6 +24063,38 @@ components:
                 $ref: '#/components/schemas/GroupResource'
             pagination:
               $ref: '#/components/schemas/Pagination'
+    GroupManagerCollectionResource:
+      description: 'Group Manager Collection Resource'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/CollectionResource'
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/GroupManagerResource'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+    GroupManagerCollectionUpdateResource:
+      description: 'Group Manager Collection Update Resource'
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupManagerResource'
+      type: object
+    GroupManagerResource:
+      description: 'Group Manager Resource'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/Resource'
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/GroupManagerResponseModel'
     GroupResource:
       description: 'Group Resource'
       type: object
@@ -23655,6 +24105,57 @@ components:
           properties:
             data:
               $ref: '#/components/schemas/Group'
+    GroupTeamCollectionResource:
+      description: 'Group Team Collection Resource'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/CollectionResource'
+        -
+          $ref: '#/components/schemas/CollectionResource'
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/GroupTeamResource'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+    GroupTeamCollectionUpdateResource:
+      description: 'Group Team Collection Update Resource'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/CollectionResource'
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/GroupTeamResource'
+    GroupTeamResource:
+      description: 'Group Team Resource'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/Resource'
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/GroupTeamResponseModel'
+    GroupManagerResponseModel:
+      title: 'Group Manager Response Model'
+      properties:
+        id:
+          type: integer
+          example: 27
+        user:
+          $ref: '#/components/schemas/User'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+      type: object
     Group:
       title: Group
       description: 'Class GroupResponseModel'
@@ -23699,6 +24200,15 @@ components:
           format: date-time
           example: '2019-09-20T12:22:20+00:00'
           nullable: true
+      type: object
+    GroupTeamResponseModel:
+      title: 'Group Team Response Model'
+      properties:
+        id:
+          type: integer
+          example: 27
+        user:
+          $ref: '#/components/schemas/Team'
       type: object
     BackgroundUploadForm:
       required:
@@ -29018,7 +29528,7 @@ components:
                   type: array
                   items: { type: string }
     PreTranslateAccuracy:
-      title: 'Pre Translate Accuracy'
+      title: 'Pre-translation Accuracy'
       description: "Calculate the accuracy of the pre-translation process\n\n__Note:__ The strings included in this report must be approved and have at least one \"pre-translate\" type translation. All other human translations will not be considered in this report, except in cases where such a translation is approved and used as a reference."
       required:
         - name
@@ -29032,7 +29542,7 @@ components:
             - pre-translate-accuracy
           example: pre-translate-accuracy
         schema:
-          description: 'Pre Translate Accuracy Report schema'
+          description: 'Pre-translation Accuracy Report schema'
           type: object
           oneOf:
             -
@@ -30231,11 +30741,9 @@ components:
         fullTranslation:
           description: 'Applies to all languages by default'
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     post-edit-report-settings-template-form.individual-rate:
@@ -30259,11 +30767,9 @@ components:
             example: 1
         fullTranslation:
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     post-edit-report-settings-template-form.net-rate-schemes:
@@ -30298,16 +30804,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - perfect
-            - '100'
-            - 99-82
-            - 81-60
-          example: perfect
+          example: 100-82
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template-form.net-rate-schemes.mt-match.net-rate:
@@ -30318,15 +30818,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-            - 81-60
           example: '100'
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template-form.net-rate-schemes.ai-match.net-rate:
@@ -30337,15 +30832,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-            - 81-60
-          example: '100'
+          example: 100-74
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template-form.net-rate-schemes.suggestion-match.net-rate:
@@ -30356,14 +30846,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-          example: '100'
+          example: perfect
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     GroupTopMembers:
@@ -30795,11 +31281,9 @@ components:
             example: uk
         fullTranslation:
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     EnterpriseGlobalReportSettingsTemplateCollectionResource:
@@ -31011,11 +31495,9 @@ components:
         fullTranslation:
           description: 'Applies to all languages by default'
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     post-edit-report-settings-template.individual-rate:
@@ -31039,11 +31521,9 @@ components:
             example: 1
         fullTranslation:
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     post-edit-report-settings-template.net-rate-schemes:
@@ -31081,16 +31561,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - perfect
-            - '100'
-            - 99-82
-            - 81-60
-          example: perfect
+          example: 100-82
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template.net-rate-schemes.mt-match.net-rate:
@@ -31101,15 +31575,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-            - 81-60
           example: '100'
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template.net-rate-schemes.ai-match.net-rate:
@@ -31120,15 +31589,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-            - 81-60
-          example: '100'
+          example: 100-74
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     post-edit-report-settings-template.net-rate-schemes.suggestion-match.net-rate:
@@ -31139,14 +31603,10 @@ components:
         matchType:
           description: 'Match type, %'
           type: string
-          enum:
-            - '100'
-            - 99-82
-          example: '100'
+          example: perfect
         price:
           description: 'Price, %'
           type: number
-          format: float
           example: 0.1
       type: object
     GroupReportGenerate:
@@ -31376,11 +31836,9 @@ components:
           example: []
         fullTranslation:
           type: number
-          format: float
           example: 0.1
         proofread:
           type: number
-          format: float
           example: 0.12
       type: object
     RevisionCollectionResource:
@@ -35384,7 +35842,7 @@ components:
             data:
               $ref: '#/components/schemas/Team'
     TeamProjectPermissionsResponseModel:
-      title: String
+      title: 'Team Project Permissions Response Model'
       properties:
         id:
           type: integer
@@ -35474,7 +35932,6 @@ components:
       type: object
     Team:
       title: Team
-      description: 'Class TeamResponseModel'
       properties:
         id:
           type: integer
@@ -39229,6 +39686,13 @@ components:
       schema:
         type: string
       example: 'en,es'
+    QueryTeamIds:
+      name: teamIds
+      in: query
+      description: 'Defines team ids. It can be one team id or a list of comma-separated ones. Get via [List Teams](#tag/Teams/operation/api.teams.getMany)'
+      schema:
+        type: integer
+      example: '1,2,18'
     RevisionId:
       name: revisionId
       in: path
